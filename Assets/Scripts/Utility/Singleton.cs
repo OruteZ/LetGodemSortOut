@@ -4,26 +4,26 @@ namespace Utility
 {
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static T _instance;
+        private static T instance;
 
         public static T Instance
         {
             get
             {
-                if (_instance != null) return _instance;
+                if (instance != null) return instance;
 
-                _instance = FindObjectsByType<T>(FindObjectsInactive.Include, FindObjectsSortMode.None)[0];
+                instance = FindObjectsByType<T>(FindObjectsInactive.Include, FindObjectsSortMode.None)[0];
                 if (FindObjectsByType<T>(FindObjectsInactive.Include, FindObjectsSortMode.None).Length > 1)
                 {
                     Debug.LogError("[Singleton] Something went really wrong " +
                                    " - 동일한 싱글톤 오브젝트가 두 개 있습니다. ");
-                    return _instance;
+                    return instance;
                 }
-                if (_instance != null)
+                if (instance != null)
                 {
                     Debug.Log("[Singleton] Using instance already created: " +
-                              _instance.gameObject.name);
-                    return _instance;
+                              instance.gameObject.name);
+                    return instance;
                 }
                             
                 // Create in Resources/Singletons/
@@ -36,30 +36,30 @@ namespace Utility
                     return null;
                 }
 
-                _instance = Instantiate(singleton).GetComponent<T>();
-                if (_instance == null)
+                instance = Instantiate(singleton).GetComponent<T>();
+                if (instance == null)
                 {
                     Debug.LogError("[Singleton] + " + typeof(T) +
                                    " : There is no Component in GameObject.");
-                    return _instance;
+                    return instance;
                 }
                                     
                 Debug.LogWarning("[Singleton] Created in Resources : " + 
-                                 _instance.gameObject.name);
-                return _instance;
+                                 instance.gameObject.name);
+                return instance;
             }
         }
 
         private void OnDestroy()
         {
-            _instance = null;
+            instance = null;
         }
         
         protected virtual void Awake()
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = this as T;
+                instance = this as T;
                 DontDestroyOnLoad(gameObject);
             }
             else

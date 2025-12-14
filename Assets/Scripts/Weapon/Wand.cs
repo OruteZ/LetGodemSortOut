@@ -51,7 +51,5 @@ public class Wand : Weapon
         
         // Set projectile's target
         projectile.SetDirection(Handler.transform.forward);
-        
-        // Set Vector
     }
 }

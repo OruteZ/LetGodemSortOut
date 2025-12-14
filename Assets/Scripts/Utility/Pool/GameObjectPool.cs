@@ -33,7 +33,6 @@ namespace Utility.Pool
         private readonly T _prefab;
         private readonly Transform _defaultParent;
 
-        // CountAll/Active/Inactive를 보려면 ObjectPool<T>로 잡아야 함
         private readonly ObjectPool<T> _pool;
 
         private readonly int _maxSize;
