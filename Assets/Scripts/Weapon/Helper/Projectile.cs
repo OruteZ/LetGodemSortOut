@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using OZ_Character.Interface;
+using Utility.Pool;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPoolable
 {
     [Header("Stats")]
     [SerializeField] float speed = 10f;
@@ -16,6 +17,7 @@ public class Projectile : MonoBehaviour
     float expireAt;
     Vector3 dir;
     Vector3 prevPos;
+    GameObjectPool<Projectile> pool;
     
     #region Properties
 
@@ -36,7 +38,10 @@ public class Projectile : MonoBehaviour
     {
         if (Time.time >= expireAt)
         {
-            Despawn();
+            if (pool != null)
+                pool.Release(this);
+            else
+                Destroy(gameObject);
             return;
         }
 
@@ -57,8 +62,11 @@ public class Projectile : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent(out IDamageable damageable))
                     damageable.TakeDamage(damage);
-
-                Despawn();
+                
+                if (pool != null)
+                    pool.Release(this);
+                else
+                    Destroy(gameObject);
                 return;
             }
         }
@@ -77,10 +85,27 @@ public class Projectile : MonoBehaviour
     {
         SetDirection(target.position - transform.position);
     }
-
-    void Despawn()
+    
+    #region IPoolable Implementation
+    public void OnSpawned()
     {
-        // 뱀서라이크면 Destroy 대신 풀링(비활성화) 권장
-        gameObject.SetActive(false);
     }
+
+    public void OnDespawned()
+    {
+    }
+
+    public void SetPool<T>(GameObjectPool<T> mPool) where T : Component
+    {
+        pool = mPool as GameObjectPool<Projectile>;
+    }
+    #endregion
+    
+    #if UNITY_EDITOR
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, castRadius);
+    }
+    #endif
 }

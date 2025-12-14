@@ -707,6 +707,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beat: {fileID: 864363611}
   emitSubBeats: 1
+--- !u!1 &1043812935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1043812936}
+  - component: {fileID: 1043812937}
+  m_Layer: 0
+  m_Name: Pool Viewer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1043812936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043812935}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.7055458, y: 6.3116055, z: -9.505127}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1043812937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043812935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030e6662abe24d3faee22f492eacbf8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnlyInPlayMode: 1
 --- !u!1 &2043408502
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,3 +964,4 @@ SceneRoots:
   - {fileID: 2043408506}
   - {fileID: 864363610}
   - {fileID: 223416985}
+  - {fileID: 1043812936}

@@ -8,7 +8,8 @@ public abstract class Weapon : ScriptableObject
     public Stat damage;
     public Stat attackSpeed;
 
-    protected WeaponHandler handler;
+    private WeaponHandler _handler;
+    protected WeaponHandler Handler => _handler;
 
     private float _attackDelay;
     
@@ -17,9 +18,10 @@ public abstract class Weapon : ScriptableObject
     
     public void Setup(WeaponHandler mHandler)
     {
-        
-        handler = mHandler;
+        _handler = mHandler;
         _attackDelay = 1 / attackSpeed.Value;
+        
+        OnSetup();
     }
 
     public bool TryAttack()
@@ -38,6 +40,8 @@ public abstract class Weapon : ScriptableObject
     }
 
     protected abstract void Attack();
+
+    protected virtual void OnSetup() { }
 
     #region EVENTS
     protected void OnStatChanged(Stat stat)
