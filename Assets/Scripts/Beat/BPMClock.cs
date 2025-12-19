@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Utility.Sequencer;
 
 namespace BeatTemplate
 {
@@ -10,7 +11,7 @@ namespace BeatTemplate
         Playing, Paused, Finished
     }
 
-    public class BpmClock : MonoBehaviour
+    public class BpmClock : MonoBehaviour, ITempoClock
     {
         [Space(10)]
         [SerializeField, Range(0f, 0.49f)] private float inputLeadSub = 0.25f;
@@ -133,6 +134,29 @@ namespace BeatTemplate
 
             // audioSource.PlayScheduled(_dspAudioStart);
             _beatState = BeatState.Playing;
+        }
+
+        #endregion
+
+        #region ITempoClock Implementation
+        public double DspTime => AudioSettings.dspTime;
+        public float Bpm => bpm;
+        public int Ppq => subPerBeat;
+        public long NowBeat => CurrentBeat;
+        public long BeatAtDspTime(double dspTime)
+        {
+            double effectiveElapsedSec = dspTime - _dspBeat0 - _pausedAccumSec;
+            double secondsPerBeat = 60.0 / (double)bpm;
+            long beat = (long)(effectiveElapsedSec / secondsPerBeat);
+            return beat;
+        }
+
+        public double DspTimeAtBeat(long beat)
+        {
+            double secondsPerBeat = 60.0 / (double)bpm;
+            double targetElapsedSec = (double)beat * secondsPerBeat;
+            double targetDspTime = _dspBeat0 + _pausedAccumSec + targetElapsedSec;
+            return targetDspTime;
         }
 
         #endregion

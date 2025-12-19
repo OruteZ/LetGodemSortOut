@@ -8,22 +8,22 @@ namespace Utility.Sequencer
         float Bpm { get; }
         int Ppq { get; }
 
-        long NowTick { get; }
-        long TickAtDspTime(double dspTime);
-        double DspTimeAtTick(long tick);
+        long NowBeat { get; }
+        long BeatAtDspTime(double dspTime);
+        double DspTimeAtBeat(long beat);
     }
 
 
     public interface ISequencePattern
     {
-        long LoopLengthTicks { get; }
+        long LoopLengthBeats { get; }
         
         /// <summary>
-        ///  fromTickInclusive 이상 toTickExclusive 미만 구간의 이벤트들을 results에 추가.
+        ///  fromBeatInclusive 이상 toBeatExclusive 미만 구간의 이벤트들을 results에 추가.
         /// </summary>
-        /// <param name="fromTickInclusive"></param>
-        /// <param name="toTickExclusive"></param>
+        /// <param name="fromBeatInclusive"></param>
+        /// <param name="toBeatExclusive"></param>
         /// <param name="results"></param>
-        void GetEventsInRange(long fromTickInclusive, long toTickExclusive, List<SeqEvent> results);
+        void GetEventsInRange(long fromBeatInclusive, long toBeatExclusive, List<SeqEvent> results);
     }
 }

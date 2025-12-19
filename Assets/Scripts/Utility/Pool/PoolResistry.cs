@@ -11,7 +11,7 @@
         public static void Register(IPoolDebugInfo pool)
         {
             if (pool == null) return;
-            if (!_pools.Contains(pool)) _pools.Add(pool);
+            if (_pools.Contains(pool) is false) _pools.Add(pool);
         }
 
         public static void Unregister(IPoolDebugInfo pool)

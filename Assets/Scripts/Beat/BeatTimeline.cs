@@ -17,8 +17,8 @@ namespace BeatTemplate
         public event Action<int, int> OnSubBeat; // (beat, sub)
 
 
-        int _lastBeat = -1;
-        (int beat, int sub) _lastSub = (-1, -1);
+        private int _lastBeat = -1;
+        private (int beat, int sub) _lastSub = (-1, -1);
 
 
         private void Update()

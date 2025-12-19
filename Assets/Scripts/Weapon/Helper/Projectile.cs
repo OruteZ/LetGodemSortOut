@@ -28,13 +28,13 @@ public class Projectile : MonoBehaviour, IPoolable
     }
     #endregion
 
-    void OnEnable()
+    private void OnEnable()
     {
         _expireAt = Time.time + lifeTime;
         _prevPos = transform.position;
     }
 
-    void Update()
+    private void Update()
     {
         if (Time.time >= _expireAt)
         {

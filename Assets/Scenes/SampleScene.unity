@@ -949,6 +949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0012396b8f86b646b783a5e75bca826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponEventSequence: {fileID: 0}
   initialWeapons:
   - {fileID: 11400000, guid: 69f7494b6297b0f448d258510d08a80a, type: 2}
   runtimeWeapons: []
